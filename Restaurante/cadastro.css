@@ -125,7 +125,7 @@ input:focus {
     cursor: pointer;
     color: white;
     font-weight: bold;
-    background: linear-gradient(to right, #0062ff, #00b7ff);
+    background: linear-gradient(to right, #023689, #0881b1);
     margin-top: 10px;
 }
 
@@ -177,6 +177,5 @@ select:focus {
 }
 
 .gerente {
-    background-color: #d5f2fd;
-
+    background-color: #f8b874;
 }

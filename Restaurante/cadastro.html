@@ -1,81 +1,98 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Comandas - Restaurante Pro</title>
-    <link rel="stylesheet" href="cadastro.css">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    <div class="container">
-        <div class="left">
-            <div class="overlay"></div>
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sistema de Comandas - Restaurante Pro</title>
+        <link rel="stylesheet" href="cadastro.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="left">
+                <div class="overlay"></div>
 
-            <div class="left-content">
-                <i class="fas fa-utensils"></i>
-                <h1>Restaurante Pro</h1>
-                <p>Sistema de Gerenciamento de Comandas</p>
+                <div class="left-content">
+                    <i class="fas fa-utensils"></i>
+                    <h1>Restaurante Pro</h1>
+                    <p>Sistema de Gerenciamento de Comandas</p>
+                </div>
+
+                <img src="https://img.freepik.com/fotos-gratis/interior-do-restaurante_1127-3394.jpg?semt=ais_hybrid&w=740&q=80"
+                    class="bg-img">
             </div>
+        <div class="right">
+        <div class="cadastro-box">
+            
+            <div class="card">
 
-            <img src="https://img.freepik.com/fotos-gratis/interior-do-restaurante_1127-3394.jpg?semt=ais_hybrid&w=740&q=80"
-                 class="bg-img">
+                <h2>Cadastro</h2>
+                <p class="subtitle">Crie uma nova conta de acesso</p>
+
+                <form>
+
+                    <div class="input-group">
+                        <label>Nome</label>
+                        <input type="text" placeholder="Digite o nome completo">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="exemplo@email.com">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Cargo</label>
+                        <select>
+                            <option class="Selecionar" disabled selected>Selecione o cargo</option>
+                            <option value="Gerente" class="gerente">Gerente</option>
+                            <option>Cozinheiro</option>
+                            <option>Garçom</option>
+                            <option>Atendente</option>
+                            <option>Caixa</option>
+                            <option>Auxiliar de Cozinha</option>
+                            <option>Faxineiro</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Senha</label>
+                        <input type="password" placeholder="Digite sua senha">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Confirmar Senha</label>
+                        <input type="password" placeholder="Repita a senha">
+                    </div>
+
+                    <button class="btn" type="submit">Cadastrar</button>
+
+                    <p class="footer-text">
+                        Já possui conta? <a href="login.html">Entrar</a>
+                    </p>
+
+                </form>
+                </div>
+            </div>
         </div>
-    <div class="right">
-    <div class="cadastro-box">
+<script>
+    const selectCargo = document.querySelector("select");
+    const botao = document.querySelector(".btn");
+
+    selectCargo.addEventListener("change", function () {
+
+        if (selectCargo.value === "Gerente") {
+            botao.style.background = "linear-gradient(to right, #c1121f, #f77f00)";
+        } 
         
-        <div class="card">
+        else {
+            botao.style.background = "linear-gradient(to right, #023689, #0881b1)";
+        }
 
-            <h2>Cadastro</h2>
-            <p class="subtitle">Crie uma nova conta de acesso</p>
+    });
+</script>
 
-            <form>
 
-                <div class="input-group">
-                    <label>Nome</label>
-                    <input type="text" placeholder="Digite o nome completo">
-                </div>
-
-                <div class="input-group">
-                    <label>Email</label>
-                    <input type="email" placeholder="exemplo@email.com">
-                </div>
-
-                <div class="input-group">
-                    <label>Cargo</label>
-                    <select>
-                        <option class="Selecionar" disabled selected>Selecione o cargo</option>
-                        <option class= "gerente">Gerente</option>
-                        <option>Cozinheiro</option>
-                        <option>Garçom</option>
-                        <option>Atendente</option>
-                        <option>Caixa</option>
-                        <option>Auxiliar de Cozinha</option>
-                        <option>Faxineiro</option>
-                    </select>
-                </div>
-
-                <div class="input-group">
-                    <label>Senha</label>
-                    <input type="password" placeholder="Digite sua senha">
-                </div>
-
-                <div class="input-group">
-                    <label>Confirmar Senha</label>
-                    <input type="password" placeholder="Repita a senha">
-                </div>
-
-                <button class="btn" type="submit">Cadastrar</button>
-
-                <p class="footer-text">
-                    Já possui conta? <a href="login.html">Entrar</a>
-                </p>
-
-            </form>
-            </div>
-        </div>
-    </div>
-
-</body>
-</html>
+    </body>
+    </html>
