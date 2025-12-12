@@ -1,4 +1,3 @@
-// Estado Global
 let currentUser = null;
 let currentPage = 'dashboard';
 let comandas = [];
@@ -6,15 +5,12 @@ let mesas = [];
 let menuItems = [];
 let currentComandaId = null;
 
-// Inicialização
 document.addEventListener('DOMContentLoaded', function() {
     inicializarDados();
     inicializarEventos();
 });
 
-// Inicializar Dados Mockados
 function inicializarDados() {
-    // Menu Items com imagens confiáveis
     menuItems = [
         { id: 1, nome: 'Filé Mignon ao Molho Madeira', categoria: 'Pratos Principais', preco: 65.00, imagem: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=400&h=400&fit=crop' },
         { id: 2, nome: 'Salmão Grelhado com Legumes', categoria: 'Pratos Principais', preco: 58.00, imagem: 'https://images.unsplash.com/photo-1485921325833-c519f76c4927?w=400&h=400&fit=crop' },
@@ -33,7 +29,6 @@ function inicializarDados() {
         { id: 15, nome: 'Cheesecake', categoria: 'Sobremesas', preco: 20.00, imagem: 'https://images.unsplash.com/photo-1533134486753-c833f0ed4866?w=400&h=400&fit=crop' }
     ];
 
-    // Mesas
     mesas = [
         { id: 1, numero: 1, capacidade: 4, status: 'ocupada', comanda: 1 },
         { id: 2, numero: 2, capacidade: 2, status: 'disponivel', comanda: null },
@@ -49,7 +44,6 @@ function inicializarDados() {
         { id: 12, numero: 12, capacidade: 4, status: 'reservada', comanda: null }
     ];
 
-    // Comandas
     comandas = [
         {
             id: 1,
@@ -143,7 +137,6 @@ function inicializarDados() {
     ];
 }
 
-// Inicializar Eventos
 function inicializarEventos() {
     // Login Tabs
     document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -156,7 +149,6 @@ function inicializarEventos() {
         });
     });
 
-    // Login Forms
     document.getElementById('gerenteForm').addEventListener('submit', function(e) {
         e.preventDefault();
         currentUser = {
@@ -179,7 +171,6 @@ function inicializarEventos() {
         fazerLogin();
     });
 
-    // Navegação
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -188,10 +179,8 @@ function inicializarEventos() {
         });
     });
 
-    // Logout
     document.getElementById('btnLogout').addEventListener('click', fazerLogout);
 
-    // Filtros de Comandas
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -201,32 +190,26 @@ function inicializarEventos() {
         });
     });
 
-    // Busca de Comandas
     document.getElementById('searchComandas').addEventListener('input', function(e) {
         buscarComandas(e.target.value);
     });
 
-    // Nova Comanda
     document.getElementById('btnNovaComanda').addEventListener('click', abrirModalNovaComanda);
 
-    // Modal Close
     document.querySelectorAll('.btn-close, .btn-cancel').forEach(btn => {
         btn.addEventListener('click', function() {
             this.closest('.modal').classList.remove('active');
         });
     });
 
-    // Form Nova Comanda
     document.getElementById('formNovaComanda').addEventListener('submit', function(e) {
         e.preventDefault();
         criarNovaComanda();
     });
 
-    // Finalizar Comanda
     document.getElementById('btnConfirmarFinalizar').addEventListener('click', confirmarFinalizacao);
 }
 
-// Login
 function fazerLogin() {
     document.getElementById('loginPage').classList.remove('active');
     document.getElementById('mainApp').classList.add('active');
@@ -234,7 +217,6 @@ function fazerLogin() {
     document.getElementById('userName').textContent = currentUser.nome;
     document.getElementById('userRole').textContent = formatarCargo(currentUser.cargo);
     
-    // Mostrar botão nova comanda apenas para garçom
     if (currentUser.cargo === 'garcom' || currentUser.cargo === 'gerente') {
         document.getElementById('btnNovaComanda').style.display = 'flex';
     }
@@ -255,11 +237,9 @@ function fazerLogout() {
     showToast('Logout realizado com sucesso!', 'info');
 }
 
-// Navegação
 function navegarPara(page) {
     currentPage = page;
     
-    // Atualizar nav links
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
         if (link.dataset.page === page) {
@@ -267,7 +247,6 @@ function navegarPara(page) {
         }
     });
     
-    // Atualizar páginas
     document.querySelectorAll('.content-page').forEach(p => p.classList.remove('active'));
     
     switch(page) {
@@ -290,9 +269,7 @@ function navegarPara(page) {
     }
 }
 
-// Dashboard
 function renderizarDashboard() {
-    // Estatísticas
     const ativas = comandas.filter(c => c.status !== 'finalizado').length;
     const pendentes = comandas.filter(c => c.status === 'pendente').length;
     const preparo = comandas.filter(c => c.status === 'preparo').length;
@@ -303,7 +280,6 @@ function renderizarDashboard() {
     document.getElementById('statPreparo').textContent = preparo;
     document.getElementById('statFaturamento').textContent = formatarMoeda(faturamento);
     
-    // Últimas Comandas
     const ultimasComandasHTML = comandas.slice(0, 5).map(comanda => `
         <div class="comanda-item" onclick="verDetalhes(${comanda.id})">
             <div class="comanda-info">
@@ -317,7 +293,6 @@ function renderizarDashboard() {
     `).join('');
     document.getElementById('ultimasComandasList').innerHTML = ultimasComandasHTML;
     
-    // Mesas Overview
     const mesasOverviewHTML = mesas.map(mesa => `
         <div class="mesa-card ${mesa.status}" onclick="verMesa(${mesa.id})">
             <div class="mesa-icon">
@@ -329,7 +304,6 @@ function renderizarDashboard() {
     `).join('');
     document.getElementById('mesasOverview').innerHTML = mesasOverviewHTML;
     
-    // Gráfico
     renderizarGrafico();
 }
 
@@ -385,7 +359,6 @@ function renderizarGrafico() {
     });
 }
 
-// Comandas
 function renderizarComandas(filteredComandas = null) {
     const comandasParaRenderizar = filteredComandas || comandas;
     
@@ -437,7 +410,6 @@ function buscarComandas(termo) {
     renderizarComandas(filtered);
 }
 
-// Detalhes da Comanda
 function verDetalhes(comandaId) {
     currentComandaId = comandaId;
     navegarPara('detalhes');
@@ -464,7 +436,6 @@ function renderizarDetalhes() {
         </div>
     `).join('');
     
-    // Botão de ação baseado no cargo
     let botaoAcao = '';
     if (podeAvancarStatus(comanda.status)) {
         const proximoStatus = getProximoStatus(comanda.status);
@@ -607,7 +578,6 @@ function avancarStatus(comandaId) {
     }
 }
 
-// Mesas
 function renderizarMesas() {
     const mesasHTML = mesas.map(mesa => {
         let comandaInfo = '';
@@ -645,7 +615,6 @@ function verMesa(mesaId) {
     }
 }
 
-// Nova Comanda
 function abrirModalNovaComanda() {
     const mesasDisponiveis = mesas.filter(m => m.status === 'disponivel');
     
@@ -676,7 +645,6 @@ function criarNovaComanda() {
     const novoNumero = `CMD-${String(novoId).padStart(3, '0')}`;
     const horario = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
     
-    // Itens aleatórios para demonstração
     const itensAleatorios = [
         { ...menuItems[0], quantidade: 1 },
         { ...menuItems[9], quantidade: 1 }
@@ -703,7 +671,6 @@ function criarNovaComanda() {
     navegarPara('comandas');
 }
 
-// Finalizar Comanda
 function abrirModalFinalizar(comandaId) {
     const comanda = comandas.find(c => c.id === comandaId);
     if (!comanda) return;
@@ -745,7 +712,6 @@ function confirmarFinalizacao() {
     navegarPara('comandas');
 }
 
-// Funções Auxiliares
 function calcularSubtotal(comanda) {
     return comanda.itens.reduce((sum, item) => sum + (item.preco * item.quantidade), 0);
 }
@@ -807,7 +773,6 @@ function getStatusColor(status) {
     return colors[status] || '#e2e8f0';
 }
 
-// Toast Notifications
 function showToast(message, type = 'info') {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
