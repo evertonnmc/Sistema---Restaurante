@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sistema de Comandas - Restaurante Pro</title>
+        <title>Criar Cadastro - Restaurante Pro</title>
         <link rel="stylesheet" href="cadastro.css">
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -34,12 +34,14 @@
 
                     <div class="input-group">
                         <label>Nome</label>
-                        <input type="text" placeholder="Digite o nome completo">
+                        <input type="text" class="form-control" id="usuario-nome" placeholder="Digite o nome completo" required>
+
                     </div>
 
                     <div class="input-group">
                         <label>Email</label>
-                        <input type="email" placeholder="exemplo@email.com">
+                        <input type="email" class="form-control" id="usuario-email" aria-describedby="emailHelp"
+ placeholder="exemplo@email.com" required>
                     </div>
 
                     <div class="input-group">
@@ -66,8 +68,7 @@
                         <input type="password" placeholder="Repita a senha">
                     </div>
 
-                    <button class="btn" type="submit">Cadastrar</button>
-
+                    <button type="submit" class="btn btn-primary" onclick="criarUsuario()">Submit</button> 
                     <p class="footer-text">
                         Já possui conta? <a href="login.html">Entrar</a>
                     </p>
@@ -92,7 +93,6 @@
 
     });
 </script>
-
-
+<script src="criarUsuario.js"></script>
     </body>
     </html>
